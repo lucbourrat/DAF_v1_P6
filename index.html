@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>exercice</title>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	</head>
+	
+
+	<body>
+		<div class="container">
+
+			<div class="container-main">
+				<div class="playerContainer player1Container">
+					<h2>Joueur 1</h2>
+					<div class="playerImage"></div>
+					<h3 class="playerName"></h3>
+					<div class="playerHp">
+							<h4>Points de vie</h4>
+							<p> : <span></span></p>
+					</div>
+					<div class="playerCoordinates">
+							<h4>Coordonnées</h4>
+							<p> : <span></span></p>
+					</div>
+
+					<h2 class="playerArmeH2">Arme</h2>
+					<div class="playerArmeImage"></div>
+					<h3 class="playerArmeName"></h3>
+					<div class="playerArmeForce">
+							<h4>Force</h4>
+							<p> : <span></span></p>
+					</div>
+				</div>
+
+				<div class="frontMapContainer"></div>
+
+				<div class="playerContainer player2Container">
+					<h2>Joueur 2</h2>
+					<div class="playerImage"></div>
+					<h3 class="playerName"></h3>
+					<div class="playerHp">
+							<h4>Points de vie</h4>
+							<p> : <span></span></p>
+					</div>
+					<div class="playerCoordinates">
+							<h4>Coordonnées</h4>
+							<p> : <span></span></p>
+					</div>
+
+					<h2 class="playerArmeH2">Arme</h2>
+					<div class="playerArmeImage"></div>
+					<h3 class="playerArmeName"></h3>
+					<div class="playerArmeForce">
+							<h4>Force</h4>
+							<p> : <span></span></p>
+					</div>
+				</div>
+			</div>
+			<div class="container-btn">
+				<div class="skip-btn" id="skip-btn">
+					J'ai terminé
+				</div>
+			</div>
+
+
+		</div>
+		<script src="jquery-3.5.1.js"></script>
+		<script type="module" src="main.js"></script>
+		<script type="module" src="gameboard.js"></script>
+		<script type="module" src="map.js"></script>
+		<script type="module" src="personnage.js"></script>
+		<script type="module" src="arme.js"></script>
+	</body>
+</html>

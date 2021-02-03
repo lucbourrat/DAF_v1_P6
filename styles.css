@@ -1,0 +1,159 @@
+/*****/
+/*ALL*/
+/*****/
+body {
+	background-color: orange;
+	font-family: 'Roboto', sans-serif;
+	display: flex;
+	justify-content: center;
+}
+
+.container-main {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+	max-width: 1800px;
+}
+
+
+/*****/
+/*MAP*/
+/*****/
+table {
+	 border:1px solid black;
+}
+
+td {
+    border: 1px solid #333;
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+td.move {
+	background-color: #ffffffaa;
+}
+
+.inaccessibleBoxes {
+	background-image: url('/images/forest.png');
+}
+
+.player1 {
+	background-image: url('/images/dog.png');
+}
+
+.player2 {
+	background-image: url('/images/cat.png');
+}
+
+.arme1 {
+	background-image: url('/images/fish-yellow.png');
+}
+
+.arme2 {
+	background-image: url('/images/fish-purple.png');
+}
+
+.arme3 {
+	background-image: url('/images/fish-blue.png');
+}
+
+.arme4 {
+	background-image: url('/images/fish-red.png');
+}
+
+.arme5 {
+	background-image: url('/images/fish-grey.png');
+}
+
+.arme6 {
+	background-image: url('/images/fish-green.png');
+}
+
+
+/********/
+/*Player*/
+/********/
+.playerContainer {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.playerContainer .playerImage,
+.playerContainer .playerArmeImage {
+	width: 64px;
+	height: 64px;
+}
+
+.playerContainer h2 {
+	margin-top: 60px;
+    font-weight: 900;
+    font-size: 35px;
+}
+
+.playerContainer .playerName {
+    font-size: 25px;
+    margin-top: 0px;
+}
+
+.playerContainer .playerArmeH2 {
+	margin-bottom: 0px;
+}
+
+.playerContainer h4, .playerContainer p {
+	margin: 0px;
+}
+
+.playerHp, .playerCoordinates, .playerArmeForce {
+	display: flex;
+}
+
+
+/*****/
+/*MAP*/
+/*****/
+.container-btn {
+	display: flex;
+	justify-content: center;
+}
+
+.skip-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    height: 60px;
+    width: 180px;
+    background-color: #0089ec;
+    margin-top: 30px;
+    color: white;
+    font-size: 19px;
+}
+
+.skip-btn:hover {
+    background-color: #41a6ef;
+    color: white;
+}
+
+/********/
+/*Media*/
+/********/
+@media screen and (max-width: 1104px) {
+  .player1Container {
+    order: 1;
+  }
+  .player2Container {
+    order: 2;
+  }
+  .frontMapContainer {
+    order: 3;
+    min-width: 704px;
+  }
+  .container-main {
+  	flex-wrap: wrap;
+  	min-width: 730px;
+  }
+}
