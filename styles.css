@@ -25,12 +25,13 @@ table {
 }
 
 td {
-    border: 1px solid #333;
-    width: 64px;
-    height: 64px;
-    background-repeat: no-repeat;
-    background-position: center;
+  border: 1px solid #333;
+  width: 64px;
+  height: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
+
 td.move {
 	background-color: #ffffffaa;
 }
@@ -90,13 +91,13 @@ td.move {
 
 .playerContainer h2 {
 	margin-top: 60px;
-    font-weight: 900;
-    font-size: 35px;
+  font-weight: 900;
+  font-size: 35px;
 }
 
 .playerContainer .playerName {
-    font-size: 25px;
-    margin-top: 0px;
+  font-size: 25px;
+  margin-top: 0px;
 }
 
 .playerContainer .playerArmeH2 {
@@ -112,31 +113,59 @@ td.move {
 }
 
 
-/*****/
-/*MAP*/
-/*****/
+/**********/
+/*Btn main*/
+/**********/
 .container-btn {
 	display: flex;
 	justify-content: center;
 }
 
-.skip-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    height: 60px;
-    width: 180px;
-    background-color: #0089ec;
-    margin-top: 30px;
-    color: white;
-    font-size: 19px;
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  height: 60px;
+  width: 180px;
+  background-color: #0089ec;
+  margin-top: 30px;
+  color: white;
+  font-size: 19px;
 }
 
-.skip-btn:hover {
-    background-color: #41a6ef;
-    color: white;
+.btn:hover {
+  background-color: #4eabef;
+  color: white;
 }
+
+
+/***********/
+/*Btn fight*/
+/***********/
+.frontFightContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.frontFightBtn {
+  height: 40px;
+  width: 140px;
+  background-color: #7f23e4;
+}
+
+.frontFightBtn:hover {
+  background-color: #9d5ee2;
+}
+
+.btnDisable {
+  background-color: #98929e;
+}
+
+.btnDisable:hover {
+  background-color: #98929e;
+}
+
 
 /********/
 /*Media*/
