@@ -21,7 +21,7 @@ export default class Map {
 			let i = this.getRandomInt(9);
 			let j = this.getRandomInt(9);
 
-			while ( (this.mapTab[i][j] != 0) || (this.isThePlayerNear(i, j, mapItems) == 1) ) {
+			while ( (this.mapTab[i][j] != 0) || (this.isThePlayerNear(i, j) == 1) ) {
 				i = this.getRandomInt(9);
 				j = this.getRandomInt(9);
 			}
@@ -42,7 +42,7 @@ export default class Map {
 		} 
 	}
 	
-	isThePlayerNear(i, j, mapItems) {
+	isThePlayerNear(i, j) {
 		//Si un joueur est à côté de la position [i][j], return 1
 		//Sinon, return 0
 

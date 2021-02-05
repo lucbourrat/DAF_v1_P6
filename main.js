@@ -117,6 +117,11 @@ function listenEvent() {
 	tableauDeJeu.updatePlayerInfos(player); //MAJ info player Front End
 	
 	removeEvents();
+
+	if (maCarte.isThePlayerNear(player.horizontalAxis, player.verticalAxis) == 1) {
+		fightStep();
+	}
+
 	gameLoop();
 }
 
@@ -132,7 +137,6 @@ function removeEvents() {
 	}
 }	
 
-
 function findCountDirection(strClassList) {
 	let strDirectionPos = strClassList.indexOf("direction");
 	let strDirectionPoslength = "direction".length;
@@ -141,7 +145,14 @@ function findCountDirection(strClassList) {
 	return countDirection;
 }
 
+function fightStep() {
+	document.getElementsByTagName("table")[0].style.display = "none"; // On cache la carte
 
+	document.getElementById("skip-btn").style.opacity = "0"; //  On cache le bouton pour skip
+
+	document.getElementsByClassName("frontFightContainer")[0].style.display = "flex"; //  On affiche les boutons pour le combat 
+
+}
 
 
 // let btnTempo = document.getElementsByClassName("playerName")[0];

@@ -20,6 +20,11 @@ body {
 /*****/
 /*MAP*/
 /*****/
+.frontMapContainer {
+    display: flex;
+    align-items: center;
+}
+
 table {
 	 border:1px solid black;
 }
@@ -144,8 +149,8 @@ td.move {
 /*Btn fight*/
 /***********/
 .frontFightContainer {
-  display: flex;
   justify-content: space-between;
+  display: none;
 }
 
 .frontFightBtn {
