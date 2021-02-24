@@ -8,6 +8,7 @@ export default class Personnage {
 		this.cssClass = "player" + id;
 		this.horizontalAxis = -1;
 		this.verticalAxis = -1;
+		this.shield = 0;
 	}
 
 	majCoordinates (i, j) {
@@ -29,6 +30,12 @@ export default class Personnage {
 			return (oldWeapon);
 		}
 	}
+
+	amIAlive() {
+		if (this.sante > 0)
+			return 1;
+		return 0;
+	}	
 
 	attaquer(cible) {
 		if (this.sante > 0) {

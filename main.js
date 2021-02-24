@@ -9,6 +9,13 @@ let playerMovements;
 let possiblesMovement
 let possiblesCell;
 let c;
+let fightRoundOfPlayerId;
+let playerFightTurn;
+let playerFightNoTurn;
+let fighterBtnAtt;
+let fighterBtnDef;
+let defenderBtnAtt;
+let defenderBtnDef;
 
 const skipButton = document.getElementById("skip-btn");
 
@@ -92,7 +99,7 @@ function gameLoop() {
 	// console.log("droite = " + possiblesMovement[1] + " - " + possiblesMovement[1].constructor.name);
 	// console.log("bas = " + possiblesMovement[2] + " - " + possiblesMovement[2].constructor.name);
 	// console.log("gauche = " + possiblesMovement[3] + " - " + possiblesMovement[3].constructor.name);
-	maCarte.afficherMapTab();
+	// maCarte.afficherMapTab();
 	for (c = 0; c < 4; c++) {
 		if (possiblesMovement[c] == 0 || possiblesMovement[c].constructor.name == "Arme") { // haut
 			possiblesCell[c].classList.add("move");
@@ -148,12 +155,111 @@ function findCountDirection(strClassList) {
 function fightStep() {
 	document.getElementsByTagName("table")[0].style.display = "none"; // On cache la carte
 
-	document.getElementById("skip-btn").style.opacity = "0"; //  On cache le bouton pour skip
+	document.getElementById("skip-btn").style.display = "none"; //  On cache le bouton pour skip
 
 	document.getElementsByClassName("frontFightContainer")[0].style.display = "flex"; //  On affiche les boutons pour le combat 
 
+	fightRoundOfPlayerId = roundOfPlayerId; // Id du joueur qui commence
+
+	fightLoop();
 }
 
+function fightLoop() {
+
+	// On défini quel player doit attaquer
+	if (fightRoundOfPlayerId % 2 == 0) {
+		playerFightTurn = tableauDeJeu.mapItems[1];
+		playerFightNoTurn = tableauDeJeu.mapItems[0];
+	}
+	else if (fightRoundOfPlayerId % 2 == 1) {
+		playerFightTurn = tableauDeJeu.mapItems[0];
+		playerFightNoTurn = tableauDeJeu.mapItems[1];
+	}
+	else
+		console.log("Erreur avec l'id des personnages");
+
+
+	// On vérifie s'il y a un mort, si oui, on sort de la boucle de combat
+	if (playerFightTurn.amIAlive() == 0)
+		endGame(playerFightNoTurn);
+	else if (playerFightNoTurn.amIAlive() == 0)
+		endGame(playerFightTurn);
+
+	// On défini les boutons de l'attanquant et ceux du defenseur
+	fighterBtnAtt = document.getElementById("btnAttPlayer" + playerFightTurn.id);
+	fighterBtnDef = document.getElementById("btnDefPlayer" + playerFightTurn.id);
+	defenderBtnAtt = document.getElementById("btnAttPlayer" + playerFightTurn.id);
+	defenderBtnDef = document.getElementById("btnDefPlayer" + playerFightTurn.id);
+
+	// On active les boutons du joueur attanquant
+	fighterBtnAtt.classList.remove("btnDisable");
+	fighterBtnDef.classList.remove("btnDisable");
+
+	// On écoute les boutons du joueur attanquant
+	fighterBtnAtt.addEventListener("click", listenEventFightAtt);
+	fighterBtnDef.addEventListener("click", listenEventFightDef);
+}
+
+function listenEventFightAtt() {
+	let damage;
+
+	// On stop l'écoute sur les boutons
+	removeFightEvents();
+
+	// On désactive les boutons attanquant
+	fighterBtnAtt.classList.add("btnDisable");
+	fighterBtnDef.classList.add("btnDisable");
+
+	// On incrémente le compteur pour savoir à qui le tour d'attaquer
+	fightRoundOfPlayerId++;
+
+	// On détermine les dégats à appliquer en fonction de si l'ennemi a jouer un coup défensif précédemment
+	if (playerFightNoTurn.shield == 1)
+		damage = playerFightTurn.arme.force/2;
+	else if (playerFightNoTurn.shield == 0)
+		damage = playerFightTurn.arme.force;
+	else 
+		console.log("Problème avec le shield");
+
+	// On décrémente les points de vie de l'ennemi
+	playerFightNoTurn.sante -= damage;
+	console.log("Le joueur " + playerFightTurn.nom + " inflige " + playerFightTurn.arme.force + " dégats à " + playerFightNoTurn.nom);
+	tableauDeJeu.updatePlayerInfos(playerFightNoTurn);
+
+	// On enleve le "bouclier" du coup défensif
+	playerFightNoTurn.shield = 0;
+
+	// On retourne dans la boucle de combat
+	fightLoop();
+}
+
+function listenEventFightDef() {
+	// On stop l'écoute sur les boutons
+	removeFightEvents();
+
+	// On désactive les boutons attanquant
+	fighterBtnAtt.classList.add("btnDisable");
+	fighterBtnDef.classList.add("btnDisable");
+
+	// On incrémente le compteur pour savoir à qui le tour d'attaquer
+	fightRoundOfPlayerId++;
+
+	// On ajoute le "bouclier" du coup défensif
+	playerFightTurn.shield = 1;
+
+	// On retourne dans la boucle de combat
+	fightLoop();
+}
+
+function removeFightEvents() {
+	fighterBtnAtt.removeEventListener("click", listenEventFightAtt);
+	fighterBtnDef.removeEventListener("click", listenEventFightDef);
+}	
+
+function endGame(winner) {
+	console.log("Fin du jeu !");
+	console.log(winner.nom + " est le vainqueur.");
+}
 
 // let btnTempo = document.getElementsByClassName("playerName")[0];
 // btnTempo.addEventListener("click", btnTempoFct);
