@@ -24,11 +24,11 @@ const tableauDeJeu = new GameBoard();
 
 // Crétion player 1
 const Arme_par_defaut_player1 = new Arme("Arme jaune", 10, 1);
-const Chien = new Personnage("Chien", 100, Arme_par_defaut_player1, 1);
+const Chien = new Personnage("Chien", 20, Arme_par_defaut_player1, 1);
 
 // Crétion player 2
 const Arme_par_defaut_player2 = new Arme("Arme violette", 10, 2);
-const Chat = new Personnage("Chat", 100, Arme_par_defaut_player2, 2);
+const Chat = new Personnage("Chat", 20, Arme_par_defaut_player2, 2);
 
 // Création des 4 armes
 const Sabre = new Arme("Arme bleu", 20, 3);
@@ -223,7 +223,7 @@ function listenEventFightAtt() {
 
 	// On décrémente les points de vie de l'ennemi
 	playerFightNoTurn.sante -= damage;
-	console.log("Le joueur " + playerFightTurn.nom + " inflige " + playerFightTurn.arme.force + " dégats à " + playerFightNoTurn.nom);
+	console.log("Le joueur " + playerFightTurn.nom + " inflige " + damage + " dégats à " + playerFightNoTurn.nom);
 	tableauDeJeu.updatePlayerInfos(playerFightNoTurn);
 
 	// On enleve le "bouclier" du coup défensif
@@ -258,7 +258,27 @@ function removeFightEvents() {
 
 function endGame(winner) {
 	console.log("Fin du jeu !");
-	console.log(winner.nom + " est le vainqueur.");
+
+	let container = document.getElementsByClassName("container-main")[0];
+	container.removeChild(container.getElementsByClassName("player1Container")[0]);
+	container.removeChild(container.getElementsByClassName("frontMapContainer")[0]);
+	container.removeChild(container.getElementsByClassName("player2Container")[0]);
+
+	let result = document.createElement("p");
+	result.textContent = winner.nom + " est le vainqueur.";
+	container.appendChild(result);
+
+	let btnReplay = document.createElement("div");
+	btnReplay.textContent = "Recommencer";
+	btnReplay.classList.add("btn");
+	container.appendChild(btnReplay);
+
+	container.style.flexDirection = "column";
+
+	btnReplay.addEventListener("click", function() {
+  		document.location.reload();
+	});
+
 }
 
 // let btnTempo = document.getElementsByClassName("playerName")[0];
