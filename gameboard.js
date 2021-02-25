@@ -127,4 +127,33 @@ export default class GameBoard{
 		//    5    ->    1                      5     %  2 =   1     
 		//    6    ->    2                      6     %  2 =   0     
 	}
+
+	endGame(winner) {
+		console.log("Fin du jeu !");
+
+		// Suppression de la map FrontEnd ainsi que des informations sur les 2 joueurs
+		let container = document.getElementsByClassName("container-main")[0];
+		container.removeChild(container.getElementsByClassName("player1Container")[0]);
+		container.removeChild(container.getElementsByClassName("frontMapContainer")[0]);
+		container.removeChild(container.getElementsByClassName("player2Container")[0]);
+
+		// Mise en place du message de victoire
+		let result = document.createElement("p");
+		result.textContent = winner.nom + " est le vainqueur.";
+		container.appendChild(result);
+
+		// Ajout du bouton replay
+		let btnReplay = document.createElement("div");
+		btnReplay.textContent = "Recommencer";
+		btnReplay.classList.add("btn");
+		container.appendChild(btnReplay);
+
+		// Mise en forme en colonne du message de victoire et du bouton Replay
+		container.style.flexDirection = "column";
+
+		// Ecoute du bouton replay pour refresh la page
+		btnReplay.addEventListener("click", function() {
+	  		document.location.reload();
+		});
+	}
 }

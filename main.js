@@ -17,25 +17,21 @@ let fighterBtnDef;
 let defenderBtnAtt;
 let defenderBtnDef;
 
+// Initialisation du bouton permettant de passer son tour après un mouvement
 const skipButton = document.getElementById("skip-btn");
-
 // Création tableau de jeu
 const tableauDeJeu = new GameBoard();
-
 // Crétion player 1
 const Arme_par_defaut_player1 = new Arme("Arme jaune", 10, 1);
 const Chien = new Personnage("Chien", 20, Arme_par_defaut_player1, 1);
-
 // Crétion player 2
 const Arme_par_defaut_player2 = new Arme("Arme violette", 10, 2);
 const Chat = new Personnage("Chat", 20, Arme_par_defaut_player2, 2);
-
 // Création des 4 armes
 const Sabre = new Arme("Arme bleu", 20, 3);
 const Shuriken = new Arme("Arme rouge", 15, 4);
 const Rasengan = new Arme("Arme grise", 35, 5);
 const Kunai = new Arme("Arme verte", 25, 6);
-
 // Ajout des 2 joueurs et des 4 armes dans le tableau items
 tableauDeJeu.addElement(Chien);
 tableauDeJeu.addElement(Chat);
@@ -43,20 +39,13 @@ tableauDeJeu.addElement(Sabre);
 tableauDeJeu.addElement(Shuriken);
 tableauDeJeu.addElement(Rasengan);
 tableauDeJeu.addElement(Kunai);
-
 // Création de la map back end
 const maCarte = new Map(tableauDeJeu.mapItems, 10); // arg2 = nombre de cailloux
-
 // Initialisation de la map FrontEnd
 tableauDeJeu.initFrontMap(maCarte.mapTab);
 tableauDeJeu.initPlayerInfos([Chien, Chat]);
 
-//
-//
-//
-//
 // Boucle de jeu
-
 let gameTurnOf3 = 0;
 let roundNb = 1;
 let roundOfPlayerId = tableauDeJeu.roundOfPlayerId(roundNb);
@@ -181,9 +170,9 @@ function fightLoop() {
 
 	// On vérifie s'il y a un mort, si oui, on sort de la boucle de combat
 	if (playerFightTurn.amIAlive() == 0)
-		endGame(playerFightNoTurn);
+		tableauDeJeu.endGame(playerFightNoTurn);
 	else if (playerFightNoTurn.amIAlive() == 0)
-		endGame(playerFightTurn);
+		tableauDeJeu.endGame(playerFightTurn);
 
 	// On défini les boutons de l'attanquant et ceux du defenseur
 	fighterBtnAtt = document.getElementById("btnAttPlayer" + playerFightTurn.id);
@@ -201,8 +190,6 @@ function fightLoop() {
 }
 
 function listenEventFightAtt() {
-	let damage;
-
 	// On stop l'écoute sur les boutons
 	removeFightEvents();
 
@@ -214,6 +201,7 @@ function listenEventFightAtt() {
 	fightRoundOfPlayerId++;
 
 	// On détermine les dégats à appliquer en fonction de si l'ennemi a jouer un coup défensif précédemment
+	let damage;
 	if (playerFightNoTurn.shield == 1)
 		damage = playerFightTurn.arme.force/2;
 	else if (playerFightNoTurn.shield == 0)
@@ -255,36 +243,3 @@ function removeFightEvents() {
 	fighterBtnAtt.removeEventListener("click", listenEventFightAtt);
 	fighterBtnDef.removeEventListener("click", listenEventFightDef);
 }	
-
-function endGame(winner) {
-	console.log("Fin du jeu !");
-
-	let container = document.getElementsByClassName("container-main")[0];
-	container.removeChild(container.getElementsByClassName("player1Container")[0]);
-	container.removeChild(container.getElementsByClassName("frontMapContainer")[0]);
-	container.removeChild(container.getElementsByClassName("player2Container")[0]);
-
-	let result = document.createElement("p");
-	result.textContent = winner.nom + " est le vainqueur.";
-	container.appendChild(result);
-
-	let btnReplay = document.createElement("div");
-	btnReplay.textContent = "Recommencer";
-	btnReplay.classList.add("btn");
-	container.appendChild(btnReplay);
-
-	container.style.flexDirection = "column";
-
-	btnReplay.addEventListener("click", function() {
-  		document.location.reload();
-	});
-
-}
-
-// let btnTempo = document.getElementsByClassName("playerName")[0];
-// btnTempo.addEventListener("click", btnTempoFct);
-
-// function btnTempoFct() {
-// 	console.log("btnTempoFct");
-// 	document.location.reload();
-// }

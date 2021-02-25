@@ -94,9 +94,3 @@ export default class Map {
 			tableauBody.getElementsByTagName("tr")[oldPosVerticalAxis].getElementsByTagName("td")[oldPosHorizontalAxis].classList.add(oldWeapon.cssClass);
 	}
 }
-	
-
-
-		// let tableauBody = document.getElementById("FontMap");
-		// tableauBody.getElementsByTagName("tr")[newPosVerticalAxis].getElementsByTagName("td")[newPosHorizontalAxis].classList.add(cssClass);
-		// tableauBody.getElementsByTagName("tr")[oldPosVerticalAxis].getElementsByTagName("td")[oldPosHorizontalAxis].classList.remove(cssClass);
